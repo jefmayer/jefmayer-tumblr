@@ -203,7 +203,7 @@
 			</svg>
         </div>
         
-		<script type="text/javascript">
+		        <script type="text/javascript">
             var app;
             (function ($, window, document, undefined) {
                 $(function () {
@@ -216,9 +216,10 @@
                     today = new Date();
                 
                 this.init = function() {
-                    {block:Posts}
+	                {block:Posts}
                     posts.push({
                         id: '',
+                        order: '',
                         icoId: '',
                         time: '-,---',
                         startDate: '',
@@ -228,10 +229,11 @@
                     });
                     {/block:Posts}
                     
-                    var j,  data;
+                    var i, j, data;
                     
-                    $('.post').each(function(i) {
-                        data = posts[i];
+                    // Parse data first
+                    for (i = 0; i < posts.length; i++) {
+	                	data = posts[i];
                         console.log(data.tags);
                         for (j = 0; j < data.tags.length; j++) {
 		                    switch (j) {
@@ -251,15 +253,42 @@
 	                            case 3:
 	                            	data.interval = data.tags[3].substr(data.tags[3].indexOf('--') + 2);
 	                            	break;
+	                            case 4:
+	                            	data.order = parseInt(data.tags[4].substr(data.tags[4].indexOf('--') + 2));
+	                            	break;
 	                        }
 	                    }
-	                    // Set date
-	                    data.time = getTimeSince(today, data.startDate, getInterval(data.interval));
-	                    // Set icon
-	                    $(this).find('use').attr('xlink:href', data.icoId);  
-                    });
+	                }
 	                
-	                console.log(posts);
+	                // Sort
+					posts.sort(function(a, b){
+						var keyA = new Date(a.order),
+						keyB = new Date(b.order);
+						// Compare the 2 dates
+						if(keyA < keyB) return -1;
+						if(keyA > keyB) return 1;
+						return 0;
+					});
+                    
+                    $('.post').each(function(i) {
+                       data = posts[i];
+	                   // Set date
+	                   data.time = getTimeSince(today, data.startDate, getInterval(data.interval));
+	                   // Set icon
+	                   $(this).find('use').attr('xlink:href', data.icoId);
+	                   $(this).find('.post-time').text(createDisplayNumber(data.time));
+	                   $(this).find('.post-elapsed').text(data.elapsedSpan);
+                    })
+                    /*
+                    $('#posts article').on('mouseover', function() {
+	                    console.log('on mouseover');
+                    }).on('mouseout', function() {
+	                    console.log('on mouseout');
+                    });
+	                */
+	                
+	                // Sort	                
+	                console.log(posts);  
                 };
                 
                 function getTimeSince(date1, date2, interval) {
@@ -278,7 +307,11 @@
 	            }
 	
 	            function createDisplayNumber(num) {
-	            	return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+	            	return num.toString().replace(/\B(?=(\d{3})+(?!\d))/, ',');
+	            }
+	            
+	            function countUpTime() {
+		            
 	            }
             
                 return this.init();   
