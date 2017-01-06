@@ -89,7 +89,7 @@
 			}
 			
 			.loader-block-phase-02.intro {
-				animation: loadIntro 0.5s ease-out forwards;
+				animation: loadIntro 0.5s 1s ease-out forwards;
 			}
 			
 			.loader-block-phase-02.pulse {
@@ -97,6 +97,7 @@
 			}
 			
 			.loader-block-phase-02.explode {
+				transform: scale(1) translate(-50%, -50%);
 				animation: loadExplode 0.25s ease-in forwards;
 			}
 			
@@ -145,12 +146,10 @@
 			
 			@keyframes loadExplode {
 				0% {
-					transform: translate(-50%, -50%);
 					width: 225px;
 					height: 350px; 
 				}
 				100% {
-					transform: translate(-50%, -50%);
 					width: 100%;
 					height: 100%;
 				}
@@ -193,31 +192,35 @@
 		<script type="text/javascript">
             (function ($, window, document, undefined) {
                 $(function () {
-	                var introTimeoutComplete;
-	                
-	                $('.loader-block-phase-02').addClass('intro');
-                    var timerPulse = setTimeout(function() {
-	                    $('.loader-block-phase-02')
-	                    	.removeClass('intro')
-	                    	.addClass('pulse');
-	                    clearTimeout(timerPulse);
-                    }, 500);
-                    
-                    var introTimeout = setTimeout(function() {
-	                    introTimeoutComplete = true;
-	                    clearLoader();
-	                    clearTimeout(introTimeout);
-                    }, 4000);
+	                var introTimeoutComplete,
+	                	minIntroMs = 4000;
+	                	                
+                    function showLoader() {
+	                    $('.loader-block-phase-02').addClass('intro');
+	                    var timerPulse = setTimeout(function() {
+		                    $('.loader-block-phase-02')
+		                    	.removeClass('intro')
+		                    	.addClass('pulse');
+		                    clearTimeout(timerPulse);
+		                    // Start pulse
+		                    var introTimeout = setTimeout(function() {
+			                    introTimeoutComplete = true;
+			                    hideLoader();
+			                    clearTimeout(introTimeout);
+		                    }, minIntroMs);
+	                    }, 1500);
+                    }
                
-	                function clearLoader() {
+	                function hideLoader() {
+		                // If minimum into time req not met, don't run
 		                if (!introTimeoutComplete) {
 			                return;
 		                }
-		                
+		                // End pulse, explode loader
 		                $('.loader-block-phase-02')
 		                	.removeClass('pulse')
 		                	.addClass('explode');
-		                	
+		                // Set timer for reveal of bg
 		                var timerImplode = setTimeout(function() {
 		                    $('.loader-block-phase-01, .loader-block-phase-02')
 		                    	.addClass('hidden');
@@ -225,7 +228,14 @@
 		                    	.addClass('implode');
 		                    clearTimeout(timerImplode);
 	                    }, 300);
+	                    var timerRemove = setTimeout(function() {
+		                    $('.loader-blocks').remove();
+		                    $('body').addClass('jm-app-loaded');
+		                    clearTimeout(timerRemove);
+	                    }, 650);
 	                }
+	                
+	                showLoader();
                  });
             })(jQuery, window, document);
         </script>
