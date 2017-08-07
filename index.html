@@ -1524,14 +1524,16 @@
                 	atBg = 0,
                     today = new Date(),
                     initServiceAt = 0,
-                    initServices = [getWhiteSoxLosses, getDiscogsData, getTransformers],
+                    initServices = [getWhiteSoxLosses, getDiscogsData, getTransformers, getStravaData],
                     whitesoxLosses = 0,
                     introTimeout,
                     introLoadComplete = false,
                     introTimeoutComplete = false,
                     minIntroMs = 5000,
                     whitesoxUrl = 'http://chicago.whitesox.mlb.com/lookup/json/named.team_seas_results.bam?team_id=145',
-                    discogsUrl = 'https://api.discogs.com/users/mode78';
+                    discogsUrl = 'https://api.discogs.com/users/mode78',
+                    // stravaKomUrl = 'https://www.strava.com/api/v3/athletes/5643933/koms?access_token=f88b3cf464f30beda917909df6632ae164846203',
+                    stravaUrl = 'https://www.strava.com/api/v3/athlete?access_token=f88b3cf464f30beda917909df6632ae164846203';
 
                 this.init = function() {
 	                {block:Posts}
@@ -1684,19 +1686,20 @@
 	            }
 	            
 	            function initServiceLoader() {
-	                if (initServiceAt === initServices.length) {
+	                if (initServiceAt >= initServices.length) {
 	                    return;
 	                } else {
-	                    if (initServiceAt === initServices.length - 1) {
-	                        initServices[initServiceAt](function() {
+	                    var at = initServiceAt;
+	                    initServiceAt += 1;
+	                    if (at === initServices.length - 1) {
+	                        initServices[at](function() {
 	                            // Call on complete
 	                            introLoadComplete = true;
 	                            hideLoader();
 	                        });
 	                    } else {
-	                        initServices[initServiceAt](initServiceLoader);
+	                        initServices[at](initServiceLoader);
 	                    }
-	                    initServiceAt += 1;
 	                }
 	            }
 	            
@@ -1716,7 +1719,7 @@
                        // Display
                        $('#my-sox .post-time').text(createDisplayNumber(losses));
                        // On complete, run method
-                       if (oncomplete !== null) {
+                       if (oncomplete !== null && oncomplete !== undefined) {
                            oncomplete();
                        }
                     });
@@ -1729,10 +1732,10 @@
                     }).done(function(data) {
                        var num = parseInt(data.num_collection);
                        // Display
-                       console.log(Math.round(num * recWgt));
+                       // console.log(Math.round(num * recWgt));
                        $('#my-vinyl .post-time').text(createDisplayNumber(Math.round(num * recWgt)));
                        // On complete, run method
-                       if (oncomplete !== null) {
+                       if (oncomplete !== null && oncomplete !== undefined) {
                            oncomplete();
                        }
                     });
@@ -1741,9 +1744,21 @@
 	            function getTransformers(oncomplete) {
 	                $('#my-prime .post-time').text(createDisplayNumber(30));
 	                // On complete, run method
-                    if (oncomplete !== null) {
+                    if (oncomplete !== null && oncomplete !== undefined) {
                        oncomplete();
                     }
+	            }
+	            
+	            function getStravaData(oncomplete) {
+	                $.ajax({
+                        url: stravaUrl
+                    }).done(function(data) {
+                       // console.log(data);
+                       // On complete, run method
+                       if (oncomplete !== null) {
+                           oncomplete();
+                       }
+                    });
 	            }
 	            
 	            function showLoader() {
