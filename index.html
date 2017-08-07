@@ -280,6 +280,15 @@
                 letter-spacing: 0.025em;
             }
             
+            #footer .footer-row-3 a {
+                color: #ffcc00;
+                text-decoration: none;
+            }
+            
+            #footer .footer-row-3 a:hover {
+                text-decoration: underline;
+            }
+            
             #footer .footer-cell-outer {
                 margin-bottom: 60px;
             }
@@ -756,6 +765,30 @@
 			-o-animation-delay: 6.45s;
 			animation-delay: 6.45s;
 		}
+		
+		.jm-app-loaded #posts article:nth-child(10) {
+			-webkit-animation-delay: 6.75s;
+			-moz-animation-delay: 6.75s;
+			-ms-animation-delay: 6.75s;
+			-o-animation-delay: 6.75s;
+			animation-delay: 6.75s;
+		}
+		
+		.jm-app-loaded #posts article:nth-child(10) .post svg {
+			-webkit-animation-delay: 6.9s;
+			-moz-animation-delay: 6.9s;
+			-ms-animation-delay: 6.9s;
+			-o-animation-delay: 6.9s;
+			animation-delay: 6.9s;
+		}
+		
+		.jm-app-loaded #posts article:nth-child(10) .slideout-reveal:before {
+			-webkit-animation-delay: 7.2s;
+			-moz-animation-delay: 7.2s;
+			-ms-animation-delay: 7.2s;
+			-o-animation-delay: 7.2s;
+			animation-delay: 7.2s;
+		}
             
             #posts article:hover .post .post-time {
                 color: #ffcc00;
@@ -1150,6 +1183,19 @@
                 <path d="M49.2,41.5l5.1-5.1c0.4-0.4,0.4-1,0-1.4s-1-0.4-1.4,0L26.1,61.8c3,0.6,6.3,1,9.8,1c13.4,0,24.3-5.3,24.3-11.8
                 	C60.2,47.4,55.3,43,49.2,41.5z"/>
             </svg>
+            <svg version="1.1" id="my-prime-ico" x="0px" y="0px" viewBox="0 0 112 112" style="enable-background:new 0 0 112 112;" xml:space="preserve">
+            	<path class="st0" d="M112,56.467c0,30.928-25.072,56-56,56s-56-25.072-56-56s25.072-56,56-56S112,25.539,112,56.467"/>
+            	<path class="st3" d="M91.666,57.755V17.722c0-2.209-1.791-4-4-4s-4,1.791-4,4v16.123c-4.038-7.243-10.836-12.733-18.973-15.052l3.81,25
+            		L56.011,54.406L43.519,43.794l3.809-25c-8.131,2.316-14.925,7.801-18.964,15.036V17.722c0-2.209-1.791-4-4-4s-4,1.791-4,4v40.034
+            		h-4.978l6.999,28.904v0.004l6.781,3.866V80.46c0-1.104,0.896-2,2-2s2,0.896,2,2v12.352l10.693,6.097l-5.547-23.244V64.933
+            		l16.686,3.896v6.999c0,0.553,0.447,1,1,1s1-0.447,1-1V68.83l16.709-3.898v10.757L68.16,98.925L79,92.733V80.46c0-1.104,0.896-2,2-2
+            		s2,0.896,2,2v9.989l6.627-3.785v-0.001l7-28.908H91.666z"/>
+            	<polygon class="st2" points="50.973,56.006 31.122,53.937 31.122,57.785 50.973,62.422"/>
+            	<polygon class="st2" points="61.039,56.006 80.891,53.937 80.891,57.785 61.039,62.422"/>
+            	<path class="st1" d="M56.998,68.83v6.997c0,0.552-0.446,0.998-0.998,1V98.92l12.16,0.005l5.547-23.236V64.932L56.998,68.83z"/>
+            	<polygon class="st1" points="56.011,54.406 68.49,43.794 64.134,15.197 56.011,15.197"/>
+            </svg>
+
         </div>
         <section id="page">
             <div class="tmblr-header">
@@ -1165,92 +1211,7 @@
     		</div>
     		
     		<h1>Some things to know about me…</h1>
-            
-            <div class="nav-menu-wrapper {block:IfNotCollapseNavigation}search-only{/block:IfNotCollapseNavigation}">
-                <nav class="nav-menu pop">
-                    <a class="selector"><span class="icon"></span></a>
-                    <div class="pop-menu west">
-                        <ul>
-                            <li class="no-hover">
-                                <form action="/search" method="get" id="search">
-                                    <input type="text" name="q" id="q" placeholder="{lang:Search}" value="{SearchQuery}">
-                                    <button type="submit"></button>
-                                </form>
-                            </li>
-                            {block:IfCollapseNavigation}
-                                <li>
-                                    <a href="/archive" class="archive arrow">{lang:Archive}</a>
-                                </li>
-                                {block:AskEnabled}
-                                    <li>
-                                        <a href="/ask" class="ask arrow">{AskLabel}</a>
-                                    </li>
-                                {/block:AskEnabled}
-                                {block:HasPages}
-                                    {block:Pages}
-                                    <li>
-                                        <a href="{URL}" class="page arrow">{Label}</a>
-                                    </li>
-                                    {/block:Pages}
-                                {/block:HasPages}
-                                {block:SubmissionsEnabled}
-                                    <li>
-                                        <a href="/submit" class="submit arrow">{SubmitLabel}</a>
-                                    </li>
-                                {/block:SubmissionsEnabled}
-                            {block:IfCollapseNavigation}
-                        </ul>
-                    </div> 
-                </nav>
-                <div class="glass"></div>
-            </div>
-            <!--<div class="nav-menu-bg"></div>-->
-            <div class="header-wrapper
-                {block:IfNotShowTitle}{block:IfNotShowDescription}no-title-desc {/block:IfNotShowDescription}{/block:IfNotShowTitle}
-                {block:IfNotShowHeaderImage}no-image {/block:IfNotShowHeaderImage}
-                {block:IfShowHeaderImage}{block:IfNotHeaderImage}no-image {/block:IfNotHeaderImage}{/block:IfShowHeaderImage}
-                avatar-style-{select:Avatar style}">
-
-                <header id="header">
-                    {block:IfShowHeaderImage}{block:IfHeaderImage}
-                    <!--<div class="header-image-wrapper">
-                        <a href="/" class="header-image {block:IfSlidingHeader}parallax{/block:IfSlidingHeader} {block:IfStretchHeaderImage}cover{/block:IfStretchHeaderImage}" data-bg-image="{HeaderImage}"></a>
-                    </div>-->
-                    {/block:IfHeaderImage}{/block:IfShowHeaderImage}
-
-                    {block:IfNotCollapseNavigation}
-                    <div class="{block:IfNotShowTitle}{block:IfNotShowDescription}no-title-desc{/block:IfNotShowDescription}{/block:IfNotShowTitle} exposed-nav-wrapper content">
-                        <div class="h-line"></div>
-                        <nav class="nav-menu">
-                            <ul>
-                                <li>
-                                    <a href="/archive">{lang:Archive}</a>
-                                </li>
-                                {block:AskEnabled}
-                                    <li>
-                                        <a href="/ask" class="ask">{AskLabel}</a>
-                                    </li>
-                                {/block:AskEnabled}
-                                {block:HasPages}
-                                    {block:Pages}
-                                    <li>
-                                        <a href="{URL}" class="page">{Label}</a>
-                                    </li>
-                                    {/block:Pages}
-                                {/block:HasPages}
-                                {block:SubmissionsEnabled}
-                                    <li>
-                                        <a href="/submit" class="submit">{SubmitLabel}</a>
-                                    </li>
-                                {/block:SubmissionsEnabled}
-                            </ul>
-                        </nav>
-                    </div>
-                    {/block:IfNotCollapseNavigation}
-
-                    <div class="back-to-top"><a class="top" href="#"></a></div>
-                </header>
-            </div>
+ 
             {block:SearchPage}
                 <div class="search-header content">
                     <h2>
@@ -1528,7 +1489,7 @@
                     </ul>
                 </div>
                 <div class="footer-row-3">
-                    <p>This site was assembled, with much love and many many hacks, in Tumblr</p>
+                    <p>This site was assembled, with much love and many many hacks, in <a href="http://tumblr.com" target="_blank">Tumblr</a></p>
                 </div>
             </footer>
         </section>
@@ -1563,7 +1524,7 @@
                 	atBg = 0,
                     today = new Date(),
                     initServiceAt = 0,
-                    initServices = [getWhiteSoxLosses, getDiscogsData],
+                    initServices = [getWhiteSoxLosses, getDiscogsData, getTransformers],
                     whitesoxLosses = 0,
                     introTimeout,
                     introLoadComplete = false,
@@ -1606,6 +1567,8 @@
                                         data.elapsedSpan = 'years since';
                                     } else if (data.tags[0] === 'poundsof') {
                                         data.elapsedSpan = 'pounds of';
+                                    } else if (data.tags[0] === 'piecesof') {
+                                        data.elapsedSpan = 'pieces of';
                                     }
 	                            	break;
 			                    case 1:
@@ -1773,6 +1736,14 @@
                            oncomplete();
                        }
                     });
+	            }
+	            
+	            function getTransformers(oncomplete) {
+	                $('#my-prime .post-time').text(createDisplayNumber(30));
+	                // On complete, run method
+                    if (oncomplete !== null) {
+                       oncomplete();
+                    }
 	            }
 	            
 	            function showLoader() {
