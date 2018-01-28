@@ -370,7 +370,7 @@
             }
 
             h1 {
-                font-family: "nimbus-sans", HelveticaNeue, Arial, sans-serif;
+                /*font-family: "nimbus-sans", HelveticaNeue, Arial, sans-serif;*/
                 font-weight: 900;
                 font-style: normal;
                 font-size: 2em;
@@ -1505,8 +1505,8 @@
         <script>!window.jQuery && document.write(unescape('%3Cscript src="http://static.tumblr.com/vr9xgox/sBgmmjhyw/jquery-1.9.1.min.js"%3E%3C/script%3E'));</script>
         <script src="http://static.tumblr.com/vr9xgox/Azhmnml1q/jquery.masonry.min.js"></script>
         <script src="http://static.tumblr.com/ehm1tdz/TyFmu1xus/main-min.js"></script>
-        <script type="text/javascript" src="//use.typekit.net/acs4rid.js"></script>
-        <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+        <!--<script type="text/javascript" src="//use.typekit.net/acs4rid.js"></script>
+        <script type="text/javascript">try{Typekit.load();}catch(e){}</script>-->
         
         <script type="text/javascript">
             var app;
@@ -1530,7 +1530,7 @@
                     introLoadComplete = false,
                     introTimeoutComplete = false,
                     minIntroMs = 5000,
-                    whitesoxUrl = 'http://chicago.whitesox.mlb.com/lookup/json/named.team_seas_results.bam?team_id=145',
+                    whitesoxUrl = 'http://lookup-service-prod.mlb.com/json/named.team_seas_results.bam?team_id=145',
                     discogsUrl = 'https://api.discogs.com/users/mode78',
                     // stravaKomUrl = 'https://www.strava.com/api/v3/athletes/5643933/koms?access_token=f88b3cf464f30beda917909df6632ae164846203',
                     stravaUrl = 'https://www.strava.com/api/v3/athlete?access_token=f88b3cf464f30beda917909df6632ae164846203';
@@ -1722,6 +1722,9 @@
                        if (oncomplete !== null && oncomplete !== undefined) {
                            oncomplete();
                        }
+                    }).fail(function() {
+                    	$('#my-sox .post-time').text('N/A');
+                    	oncomplete();
                     });
 	            }
 	            
@@ -1738,6 +1741,9 @@
                        if (oncomplete !== null && oncomplete !== undefined) {
                            oncomplete();
                        }
+                    }).fail(function() {
+                    	$('#my-vinyl .post-time').text('N/A');
+                    	oncomplete();
                     });
 	            }
 	            
